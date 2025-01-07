@@ -13,7 +13,7 @@
     <button (click)="logContent()">Compare</button>
 </div>
 
-@if (this.sanitizedContent) {
+@if (this.sanitizedContent && this.quillContent) {
     <div class="editor">
         <h1>pasted html</h1>
         <p>{{ this.quillContent }}</p>
