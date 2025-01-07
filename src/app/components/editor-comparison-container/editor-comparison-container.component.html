@@ -1,10 +1,14 @@
 <div class="editor">
     <h2 (click)="openDocumentation('https://quilljs.com/docs/quickstart/')">Froala</h2>
-    <textarea [froalaEditor]></textarea>
+    <textarea [froalaEditor]="froalaOptions" [(froalaModel)]="froalaContent"></textarea>
 </div>
 
 
 <div class="editor">
     <h2 (click)="openDocumentation('https://quilljs.com/docs/quickstart/')">Quill</h2>
-    <quill-editor></quill-editor>
+    <quill-editor [(ngModel)]="quillContent" [modules]="modules" #quillComp></quill-editor>
+</div>
+
+<div>
+    <button (click)="logContent()">Compare</button>
 </div>
