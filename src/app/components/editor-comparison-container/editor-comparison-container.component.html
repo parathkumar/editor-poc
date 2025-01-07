@@ -6,20 +6,22 @@
 
 <div class="editor">
     <h2 (click)="openDocumentation('https://quilljs.com/docs/quickstart/')">Quill</h2>
-    <quill-editor [(ngModel)]="quillContent" [modules]="modules" #quillComp></quill-editor>
+    <quill-editor [(ngModel)]="quillContent" [modules]="modules"  #quillComp></quill-editor>
 </div>
 
 <div>
-    <button (click)="logContent()">Compare</button>
+    <button (click)="toggleSanitize()">{{showSanitize() ? 'Show': 'Hide'}} compare</button>
 </div>
 
-@if (this.sanitizedContent && this.quillContent) {
-    <div class="editor">
-        <h1>pasted html</h1>
-        <p>{{ this.quillContent }}</p>
-        <h1>clean html</h1>
-        <p>{{ this.sanitizedContent }}</p>
-        <h1>display clean html</h1>
-        <div [innerHTML]="this.sanitizedContent"></div>
-    </div>
+@if (this.quillContent) {
+<div class="editor">
+    <h1>pasted html</h1>
+    <p>{{ this.quillContent }}</p>
+    @if (showSanitize()) {
+    <h1>clean html</h1>
+    <p>{{ this.sanitizedContent }}</p>
+    <h1>display clean html</h1>
+    <div [innerHTML]="this.sanitizedContent"></div>
+    }
+</div>
 }

@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, viewChild } from '@angular/core';
+import { Component, computed, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FroalaEditorModule } from 'angular-froala-wysiwyg';
-import { QuillEditorComponent, QuillModule, QuillModules } from 'ngx-quill';
+import { QuillEditorComponent, QuillModule } from 'ngx-quill';
 import Table from 'quill/modules/table';
 import * as sanitize from 'sanitize-html';
 import { quillModuleConfig } from './editor-comparison-container.helper';
@@ -19,6 +19,7 @@ export class EditorComparisonContainerComponent {
   //froalaContent = '';
   quillContent = '';
   sanitizedContent = '';
+  showSanitize = signal(false);
   quillComponent = viewChild<QuillEditorComponent>('quillComp');
   // froalaOptions = {
   //   pluginsEnabled: ['table', 'align', 'link', 'image'],
@@ -29,9 +30,9 @@ export class EditorComparisonContainerComponent {
   protected openDocumentation(url: string) {
     window.open(url, '_blank');
   }
-  protected logContent() {
+  protected toggleSanitize() {
     //console.log(this.froalaContent);
-    console.log(this.quillContent);
+    this.showSanitize.set(!this.showSanitize());
     this.sanitizedContent = sanitize(this.quillContent);
   }
 }
