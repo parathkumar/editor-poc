@@ -1,7 +1,7 @@
-<div class="editor">
+<!-- <div class="editor">
     <h2 (click)="openDocumentation('https://quilljs.com/docs/quickstart/')">Froala</h2>
     <textarea [froalaEditor]="froalaOptions" [(froalaModel)]="froalaContent"></textarea>
-</div>
+</div> -->
 
 
 <div class="editor">
@@ -12,3 +12,14 @@
 <div>
     <button (click)="logContent()">Compare</button>
 </div>
+
+@if (this.sanitizedContent) {
+    <div class="editor">
+        <h1>pasted html</h1>
+        <p>{{ this.quillContent }}</p>
+        <h1>clean html</h1>
+        <p>{{ this.sanitizedContent }}</p>
+        <h1>display clean html</h1>
+        <div [innerHTML]="this.sanitizedContent"></div>
+    </div>
+}
